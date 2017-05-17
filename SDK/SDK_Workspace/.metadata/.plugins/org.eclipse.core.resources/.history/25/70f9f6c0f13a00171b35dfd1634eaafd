@@ -7,13 +7,19 @@
 
 #include "SI_draw.h"
 
-
-void set_foreground_color(Xuint32 BaseAddress, int boja) {
-	VGA_PERIPH_MEM_mWriteMemory(BaseAddress + 0x10, boja);
-}
-
-void set_background_color(Xuint32 BaseAddress, int boja) {
-	VGA_PERIPH_MEM_mWriteMemory(BaseAddress + 0x14, boja);
+void draw_rectangle(Xuint32 BaseAddress){
+	int i, j, k;
+		for (j = 0; j < 480; j++){
+			for (k = 0; k<(640/32); k++){
+				i = j*(640/32) + k;
+				if ((j > 200) && (j < 280) && (k > 8) && (k < 12)) {
+					VGA_PERIPH_MEM_mWriteMemory(BaseAddress + GRAPHICS_MEM_OFF + i*4, 0xFFFFFFFF);
+				}
+				else{
+					VGA_PERIPH_MEM_mWriteMemory(BaseAddress + GRAPHICS_MEM_OFF + i*4, 0x0);
+				}
+			}
+		}
 }
 
 void draw_square(Xuint32 BaseAddress, Xuint8 x_crdnt, Xuint8 y_crdnt)

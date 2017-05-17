@@ -97,128 +97,8 @@ void init_draw(Xuint8* row)
 		}
 	}
 }
-void draw_background()
-{
-	int i,j,pom;
-	for(i=0;i<410;i++)
-		{
-			for(j=30;j<=54;j++)
-			{
-				if(i<=16)
-				{
-					pom = i*80 + j;
-					PUT_TO_FSL(pom, 0x44444444);
-				}
-			}
-			pom = i*80 + 29;
-			PUT_TO_FSL(pom, 0x44444444);
-			pom = i*80 + 54;
-			PUT_TO_FSL(pom, 0x44444444);
 
 
-
-		}
-		int pom1=30;
-		int pom2=29;
-		int pom4=53;
-		int pom3=54;
-		while(i<440)
-		{
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x41111111);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x14444444);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11111114);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44444441);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44111111);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11444444);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11111144);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44444411);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44411111);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11144444);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11111444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44444111);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44441111);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11114444);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11114444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44441111);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44444111);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11111444);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11144444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44411111);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44444411);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11111144);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x11444444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x44111111);
-				i++;
-
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44444441);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11111114);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x14444444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x41111111);
-				i++;
-
-				pom=i*80+pom1;
-				PUT_TO_FSL(pom, 0x44444444);
-				pom=i*80+pom2;
-				PUT_TO_FSL(pom, 0x11111111);
-				pom=i*80+pom4;
-				PUT_TO_FSL(pom, 0x44444444);
-				pom=i*80+pom3;
-				PUT_TO_FSL(pom, 0x11111111);
-				i++;
-
-				pom1++;
-				pom2++;
-				pom3--;
-				pom4--;
-
-		}
-
-}
-void draw_block1(int x1, int y1, int x2, int y2,int x3, int y3,int x4, int y4)
-{
-	int i,j;
-	int veci;
-	//if()
-}
 void clear_text_screen(Xuint32 BaseAddress)
 {
    	int i;
@@ -521,8 +401,129 @@ int main()
 	int i,j,pom;
 	clear_graphics_screen(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR);
 	set_foreground_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
-	draw_background();
-	set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
+	for(i=0;i<410;i++)
+	{
+		for(j=26;j<=54;j++)
+		{
+			if(i<=16)
+			{
+				pom = i*80 + j;
+				PUT_TO_FSL(pom, 0x44444444);
+			}
+		}
+		for(j=25;j<26;j++)
+		{
+			pom = i*80 + j;
+			PUT_TO_FSL(pom, 0x44444444);
+		}
+		for(j=55;j<56;j++)
+		{
+			pom = i*80 + j;
+			PUT_TO_FSL(pom, 0x44444444);
+		}
+
+
+	}
+	int pom1=26;
+	int pom2=25;
+	int pom4=54;
+	int pom3=55;
+	while(i<440)
+	{
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x41111111);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x14444444);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11111114);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44444441);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44111111);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11444444);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11111144);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44444411);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44411111);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11144444);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11111444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44444111);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44441111);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11114444);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11114444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44441111);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44444111);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11111444);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11144444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44411111);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44444411);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11111144);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x11444444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x44111111);
+			i++;
+		*/
+		/*
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44444441);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11111114);
+			pom=i*80*pom4;
+			PUT_TO_FSL(pom, 0x14444444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x41111111);
+			i+=8;
+		*/
+			pom=i*80+pom1;
+			PUT_TO_FSL(pom, 0x44444444);
+			pom=i*80+pom2;
+			PUT_TO_FSL(pom, 0x11111111);
+			pom=i*80+pom4;
+			PUT_TO_FSL(pom, 0x44444444);
+			pom=i*80+pom3;
+			PUT_TO_FSL(pom, 0x11111111);
+			i++;
+
+			pom1++;
+			pom2++;
+			pom3--;
+			pom4--;
+
+	}
+    set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
 
 	print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
 	/*

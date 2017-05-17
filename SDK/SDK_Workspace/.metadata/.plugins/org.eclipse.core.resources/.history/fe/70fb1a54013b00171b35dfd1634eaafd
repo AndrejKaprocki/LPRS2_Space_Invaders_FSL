@@ -213,12 +213,7 @@ void draw_background()
 		}
 
 }
-void draw_block1(int x1, int y1, int x2, int y2,int x3, int y3,int x4, int y4)
-{
-	int i,j;
-	int veci;
-	//if()
-}
+
 void clear_text_screen(Xuint32 BaseAddress)
 {
    	int i;
@@ -521,8 +516,8 @@ int main()
 	int i,j,pom;
 	clear_graphics_screen(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR);
 	set_foreground_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
-	draw_background();
-	set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
+
+    set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
 
 	print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
 	/*
