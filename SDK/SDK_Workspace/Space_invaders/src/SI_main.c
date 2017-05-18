@@ -97,6 +97,63 @@ void init_draw(Xuint8* row)
 		}
 	}
 }
+
+void draw_left_leg(int index)
+{
+	int pom,i,j;
+	for(i=440;i<445;i++)
+	{
+		int m=0;
+		for(j=34;j<40;j++)
+		{
+			pom=(i+m)*80+j;
+			m+=index;
+			PUT_TO_FSL(pom, 0xbbbbbbbb);
+		}
+	}
+}
+void erase_left_leg(int index)
+{
+	int pom,i,j;
+	for(i=440;i<445;i++)
+	{
+		int m=0;
+		for(j=34;j<40;j++)
+		{
+			pom=(i+m)*80+j;
+			m+=index;
+			PUT_TO_FSL(pom, 0x11111111);
+		}
+	}
+}
+void move_left_leg()
+{
+	draw_left_leg(3);
+	erase_left_leg(3);
+	draw_left_leg(2);
+	erase_left_leg(2);
+	draw_left_leg(1);
+	erase_left_leg(1);
+	draw_left_leg(0);
+	erase_left_leg(0);
+	draw_left_leg(-1);
+	erase_left_leg(-1);
+	draw_left_leg(-2);
+	erase_left_leg(-2);
+	draw_left_leg(-3);
+	erase_left_leg(-3);
+	draw_left_leg(-2);
+	erase_left_leg(-2);
+	draw_left_leg(-1);
+	erase_left_leg(-1);
+	draw_left_leg(0);
+	erase_left_leg(0);
+	draw_left_leg(1);
+	erase_left_leg(1);
+	draw_left_leg(2);
+	erase_left_leg(2);
+	draw_left_leg(3);
+}
 void draw_background()
 {
 	int i,j,pom;
@@ -104,7 +161,7 @@ void draw_background()
 		{
 			for(j=30;j<=54;j++)
 			{
-				if(i<=16)
+				if(i<=10)
 				{
 					pom = i*80 + j;
 					PUT_TO_FSL(pom, 0x44444444);
@@ -213,12 +270,8 @@ void draw_background()
 		}
 
 }
-void draw_block1(int x1, int y1, int x2, int y2,int x3, int y3,int x4, int y4)
-{
-	int i,j;
-	int veci;
-	//if()
-}
+
+
 void clear_text_screen(Xuint32 BaseAddress)
 {
    	int i;
@@ -523,31 +576,45 @@ int main()
 	set_foreground_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
 	draw_background();
 	set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
+	//draw_block(20,45,21,41,26,40);
+	//draw_block(40,15,41,11,16,40);
+	//draw_block(285,44,300,47,285,51); //y x; a d b
 
-	print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
-	/*
-	clear_text_screen(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR);
-
-
-
-
-	set_cursor(6543);
-
-
-	VGA_PERIPH_MEM_mWriteMemory(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR + 0x04, 0b01);
-
-    set_foreground_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
-    set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0xFFFF00);
-
-	print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
-
-	set_cursor(8543);
-	draw_invader(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 200, 200, 1);
-	for(i=0;i<200;i++)
+	//print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
+	//draw_minus_two();
+	//draw_leg();
+	draw_left_leg(2);
+	while(1)
 	{
-		PUT_TO_FSL(i, 0x88833888);
+		while(input != 30)	//wait for input from user
+		{
+			input = VGA_PERIPH_MEM_mReadMemory(XPAR_MY_PERIPHERAL_0_BASEADDR);
+			seed++;
+		}
+		srand(seed);
+
+		VGA_PERIPH_MEM_mWriteMemory(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR + 0x04, 0b11);
+		game_over = 0;
+
+				while(game_over!=5)
+				{
+						switch(input)
+						{
+							case LEFT_JOY:
+									erase_left_leg(2);
+									break;
+
+							case RIGHT_JOY:
+									game_over++;
+									break;
+
+							case MIDDLE_JOY:
+									game_over++;
+									break;
+						}
+
+				}
 	}
-*/
 	return 0;
 }
 
