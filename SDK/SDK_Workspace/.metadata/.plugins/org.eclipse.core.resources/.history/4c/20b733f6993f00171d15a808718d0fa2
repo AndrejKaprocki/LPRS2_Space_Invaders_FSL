@@ -29,7 +29,7 @@ void vga_interrupt_handler(void *BaseAddress)
 		else
 			spaceship_speed_cnt+=2;
 
-	if(projectil_speed == PROJECTILE_SPEED/7)
+	if(projectil_speed == PROJECTILE_SPEED/4)
 	{
 		projectil_flag = 1;
 		projectil_speed = 0;

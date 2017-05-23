@@ -101,6 +101,8 @@ void init_draw(Xuint8* row)
 }
 void draw_ball(int x, int y, int x_prev, int y_prev)
 {
+	PUT_TO_FSL(((y_prev-6)*80 + x_prev), 0x11111111);
+	PUT_TO_FSL(((y_prev-5)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev-4)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev-3)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev-2)*80 + x_prev), 0x11111111);
@@ -110,7 +112,11 @@ void draw_ball(int x, int y, int x_prev, int y_prev)
 	PUT_TO_FSL(((y_prev+2)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev+3)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev+4)*80 + x_prev), 0x11111111);
+	PUT_TO_FSL(((y_prev+5)*80 + x_prev), 0x11111111);
+	PUT_TO_FSL(((y_prev+6)*80 + x_prev), 0x11111111);
 
+	PUT_TO_FSL(((y_prev-6)*80 + x_prev+1), 0x11111111);
+	PUT_TO_FSL(((y_prev-5)*80 + x_prev+1), 0x11111111);
 	PUT_TO_FSL(((y_prev-4)*80 + x_prev+1), 0x11111111);
 	PUT_TO_FSL(((y_prev-3)*80 + x_prev+1), 0x11111111);
 	PUT_TO_FSL(((y_prev-2)*80 + x_prev+1), 0x11111111);
@@ -120,29 +126,40 @@ void draw_ball(int x, int y, int x_prev, int y_prev)
 	PUT_TO_FSL(((y_prev+2)*80 + x_prev+1), 0x11111111);
 	PUT_TO_FSL(((y_prev+3)*80 + x_prev+1), 0x11111111);
 	PUT_TO_FSL(((y_prev+4)*80 + x_prev+1), 0x11111111);
+	PUT_TO_FSL(((y_prev+5)*80 + x_prev+1), 0x11111111);
+	PUT_TO_FSL(((y_prev+6)*80 + x_prev+1), 0x11111111);
 
-	PUT_TO_FSL(((y-4)*80 + x), 0x11113333);
-	PUT_TO_FSL(((y-3)*80 + x), 0x11333333);
-	PUT_TO_FSL(((y-2)*80 + x), 0x13333333);
+	PUT_TO_FSL(((y-6)*80 + x), 0x11113333);
+	PUT_TO_FSL(((y-5)*80 + x), 0x11333333);
+	PUT_TO_FSL(((y-4)*80 + x), 0x13333333);
+	PUT_TO_FSL(((y-3)*80 + x), 0x33333333);
+	PUT_TO_FSL(((y-2)*80 + x), 0x33333333);
 	PUT_TO_FSL(((y-1)*80 + x), 0x33333333);
 	PUT_TO_FSL((y*80 + x), 0x33333333);
 	PUT_TO_FSL(((y+1)*80 + x), 0x33333333);
-	PUT_TO_FSL(((y+2)*80 + x), 0x13333333);
-	PUT_TO_FSL(((y+3)*80 + x), 0x11333333);
-	PUT_TO_FSL(((y+4)*80 + x), 0x11113333);
+	PUT_TO_FSL(((y+2)*80 + x), 0x33333333);
+	PUT_TO_FSL(((y+3)*80 + x), 0x33333333);
+	PUT_TO_FSL(((y+4)*80 + x), 0x13333333);
+	PUT_TO_FSL(((y+5)*80 + x), 0x11333333);
+	PUT_TO_FSL(((y+6)*80 + x), 0x11113333);
 
-	PUT_TO_FSL(((y-4)*80 + x+1), 0x33331111);
-	PUT_TO_FSL(((y-3)*80 + x+1), 0x33333311);
-	PUT_TO_FSL(((y-2)*80 + x+1), 0x33333331);
+	PUT_TO_FSL(((y-6)*80 + x+1), 0x33331111);
+	PUT_TO_FSL(((y-5)*80 + x+1), 0x33333311);
+	PUT_TO_FSL(((y-4)*80 + x+1), 0x33333331);
+	PUT_TO_FSL(((y-3)*80 + x+1), 0x33333333);
+	PUT_TO_FSL(((y-2)*80 + x+1), 0x33333333);
 	PUT_TO_FSL(((y-1)*80 + x+1), 0x33333333);
 	PUT_TO_FSL((y*80 + x+1), 0x33333333);
 	PUT_TO_FSL(((y+1)*80 + x+1), 0x33333333);
-	PUT_TO_FSL(((y+2)*80 + x+1), 0x33333331);
-	PUT_TO_FSL(((y+3)*80 + x+1), 0x33333311);
-	PUT_TO_FSL(((y+4)*80 + x+1), 0x33331111);
+	PUT_TO_FSL(((y+2)*80 + x+1), 0x33333333);
+	PUT_TO_FSL(((y+3)*80 + x+1), 0x33333333);
+	PUT_TO_FSL(((y+4)*80 + x+1), 0x33333331);
+	PUT_TO_FSL(((y+5)*80 + x+1), 0x33333311);
+	PUT_TO_FSL(((y+6)*80 + x+1), 0x33331111);
 }
 void draw_left_leg(int index)
 {
+
 	int pom,i,j;
 	for(i=440;i<445;i++)
 	{
@@ -455,6 +472,16 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
     }
 }
 
+int ball_next_x(ball_x,ball_y,ball_angle)
+{
+	if(ball_angle<90 || ball_angle>270)
+	{
+		return tan(ball_angle) + ball_y;
+	}
+	else
+		return 1;
+}
+
 int main()
 {
 	/*************************/
@@ -713,7 +740,8 @@ int main()
 	draw_ball(50,20, 0,0);
 	lives=1;
 	int in_game=0;
-	int ball_x, ball_y, ball_x_prev, ball_y_prev;
+	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
+	int ball_angle=290;
 	//while(1)
 	{
 		/*while(input != 30)	//wait for input from user
@@ -738,22 +766,26 @@ int main()
 							case RIGHT_JOY:
 									move_right_leg();
 									break;
-							case 0b11110:
+							case DOWN_JOY:
 								if(lives > 0 && !in_game)
 								{
 									ball_x=00;
 									ball_y=20;
-									while(ball_x<480)
-									{
-										ball_x_prev=ball_x;
-										ball_y_prev=ball_y;
-										ball_x++;
-										draw_ball(ball_y,ball_x,ball_y_prev,ball_x_prev);
-									}
+									move_ball=1;
 								}
 								break;
 						}
 
+						if(projectil_flag && move_ball)
+						{
+							ball_x=ball_next_x(ball_x,ball_y,ball_angle);
+							ball_y++;
+							draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
+
+							ball_x_prev=ball_x;
+							ball_y_prev=ball_y;
+							projectil_flag = 0;
+						}
 				}
 	}
 	return 0;

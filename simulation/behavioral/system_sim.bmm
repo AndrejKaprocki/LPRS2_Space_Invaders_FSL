@@ -1,4 +1,4 @@
-// File: C:\materija\ra2-2014\lprs2pr\LPRS2_Space_Invaders_FSL\simulation\behavioral\system_sim.bmm
+// File: C:\materija\ra2\LPRS2_Space_Invaders_FSL\simulation\behavioral\system_sim.bmm
 
 ADDRESS_MAP microblaze_0 MICROBLAZE-LE 100
 	ADDRESS_SPACE microblaze_0_bram_block_combined COMBINED [0x00000000:0x00007fff]

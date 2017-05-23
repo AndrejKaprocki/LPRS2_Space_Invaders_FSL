@@ -14,22 +14,16 @@ void vga_interrupt_handler(void *BaseAddress)
 	input = VGA_PERIPH_MEM_mReadMemory(XPAR_MY_PERIPHERAL_0_BASEADDR);
 
 	/* spaceship and projectiles signals */
-	/*if(spaceship_speed_cnt >= (spaceship_speed))
+	if(spaceship_speed_cnt >= (spaceship_speed))
 	{
 		spaceship_flag = 1;
 		spaceship_speed_cnt = 0;
 	}
 	else
-		spaceship_speed_cnt+=2; */
-	if(spaceship_speed_cnt >= (leg_speed))
-		{
-			spaceship_flag = 1;
-			spaceship_speed_cnt = 0;
-		}
-		else
-			spaceship_speed_cnt+=2;
+		spaceship_speed_cnt+=2;
 
-	if(projectil_speed == PROJECTILE_SPEED/7)
+
+	if(projectil_speed == PROJECTILE_SPEED)
 	{
 		projectil_flag = 1;
 		projectil_speed = 0;

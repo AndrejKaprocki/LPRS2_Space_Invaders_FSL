@@ -3,12 +3,12 @@
 // Release 14.6 - Data2MEM P.68d, build 3.0.10 Apr 3, 2013
 // Copyright (c) 1995-2017 Xilinx, Inc.  All rights reserved.
 //
-// Command: data2mem -bm system_sim.bmm -bd "C:\materija\ra2-2014\lprs2pr\LPRS2_Space_Invaders_FSL\bootloops\microblaze_0.elf" tag microblaze_0 -bx "C:\materija\ra2-2014\lprs2pr\LPRS2_Space_Invaders_FSL\simulation\behavioral" -u -p "xc6slx45fgg676-2"
+// Command: data2mem -bm system_sim.bmm -bd C:\materija\ra2\LPRS2_Space_Invaders_FSL\bootloops\microblaze_0.elf tag microblaze_0 -bx C:\materija\ra2\LPRS2_Space_Invaders_FSL\simulation\behavioral -u -p "xc6slx45fgg676-2"
 //
-// Created on Friday May 19, 2017 - 09:25:50 am, from:
+// Created on Tuesday May 23, 2017 - 11:10:54 am, from:
 //
 //     Map file     - system_sim.bmm
-//     Data file(s) - C:\materija\ra2-2014\lprs2pr\LPRS2_Space_Invaders_FSL\bootloops\microblaze_0.elf
+//     Data file(s) - C:\materija\ra2\LPRS2_Space_Invaders_FSL\bootloops\microblaze_0.elf
 //
 // Address space 'microblaze_0.microblaze_0_bram_block_combined', bit lane [15:14].
 //
