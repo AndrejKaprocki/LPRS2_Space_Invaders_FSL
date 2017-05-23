@@ -101,6 +101,12 @@ void init_draw(Xuint8* row)
 }
 void draw_ball(int x, int y, int x_prev, int y_prev)
 {
+	int pom=x;
+	x=y;
+	y=pom;
+	pom=x_prev;
+	x_prev=y_prev;
+	y_prev=pom;
 	PUT_TO_FSL(((y_prev-6)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev-5)*80 + x_prev), 0x11111111);
 	PUT_TO_FSL(((y_prev-4)*80 + x_prev), 0x11111111);
@@ -472,11 +478,11 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
     }
 }
 
-int ball_next_y(ball_y,ball_angle)
+int ball_next_x(ball_x,ball_y,ball_angle)
 {
 	if(ball_angle>=0 && ball_angle<90)
 	{
-		return ball_y-tan(ball_angle*3.81/360);
+		return ball_y-tan(ball_angle);
 	}
 
 	if(ball_angle>=90 && ball_angle<180)
@@ -750,11 +756,11 @@ int main()
 	//draw_leg();
 	draw_left_leg(2);
 	draw_right_leg(2);
-	draw_ball(200,50, 0,0);
+	draw_ball(10,200, 0,0);
 	lives=1;
 	int in_game=0;
 	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
-	int ball_angle=80;
+	int ball_angle=5;
 	//while(1)
 	{
 		/*while(input != 30)	//wait for input from user
@@ -791,7 +797,7 @@ int main()
 
 						if(projectil_flag && move_ball)
 						{
-							ball_y=ball_next_y(ball_y,ball_angle);
+							ball_y=ball_next_x(ball_x,ball_y,ball_angle);
 							ball_x++;
 							draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
 

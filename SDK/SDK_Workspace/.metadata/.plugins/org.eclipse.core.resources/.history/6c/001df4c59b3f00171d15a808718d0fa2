@@ -472,11 +472,11 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
     }
 }
 
-int ball_next_y(ball_y,ball_angle)
+int ball_next_x(ball_x,ball_y,ball_angle)
 {
 	if(ball_angle>=0 && ball_angle<90)
 	{
-		return ball_y-tan(ball_angle*3.81/360);
+		return ball_y-tan(ball_angle);
 	}
 
 	if(ball_angle>=90 && ball_angle<180)
@@ -750,11 +750,11 @@ int main()
 	//draw_leg();
 	draw_left_leg(2);
 	draw_right_leg(2);
-	draw_ball(200,50, 0,0);
+	draw_ball(50,20, 0,0);
 	lives=1;
 	int in_game=0;
 	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
-	int ball_angle=80;
+	int ball_angle=60;
 	//while(1)
 	{
 		/*while(input != 30)	//wait for input from user
@@ -782,8 +782,8 @@ int main()
 							case DOWN_JOY:
 								if(lives > 0 && !in_game)
 								{
-									ball_x=20;
-									ball_y=200;
+									ball_x=200;
+									ball_y=20;
 									move_ball=1;
 								}
 								break;
@@ -791,7 +791,7 @@ int main()
 
 						if(projectil_flag && move_ball)
 						{
-							ball_y=ball_next_y(ball_y,ball_angle);
+							ball_y=ball_next_x(ball_x,ball_y,ball_angle);
 							ball_x++;
 							draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
 
