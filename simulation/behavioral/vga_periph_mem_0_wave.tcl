@@ -2,7 +2,7 @@
 #  Xilinx EDK 14.6 EDK_P.68d
 #  Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 #
-#  File     vga_periph_mem_0_wave.tcl (Wed May 24 11:35:51 2017)
+#  File     vga_periph_mem_0_wave.tcl (Wed May 24 14:26:13 2017)
 #
 #  Module   system_vga_periph_mem_0_wrapper
 #  Instance vga_periph_mem_0

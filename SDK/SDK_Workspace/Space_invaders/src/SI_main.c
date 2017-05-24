@@ -472,28 +472,23 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
     }
 }
 
-/*int ball_next_y(ball_y,ball_angle)
+int get_angle(int x, int y, int angle)
 {
-	if(ball_angle>=0 && ball_angle<90)
-	{
-		return ball_y-tan(ball_angle*3.81/360);
-	}
+	if(y<=410 && x==30 && angle>180)
+		return 540-angle;
+	if(y<=410 && x==30 && angle<=180)
+		return 180-angle;
+	if(y<=410 && x==52 && angle<90)
+		return 180-angle;
+	if(y<=410 && x==52 && angle>270)
+		return 540-angle;
+	if(y==12 && angle<90)
+		return 360-angle;
+	if(y==12 && angle>90)
+		return 360-angle;
+	return angle;
 
-	if(ball_angle>=90 && ball_angle<180)
-	{
-		return 1;
-	}
-
-	if(ball_angle>=180 && ball_angle<270)
-	{
-		return 1;
-	}
-
-	if(ball_angle>=270 && ball_angle<360)
-	{
-		return 1;
-	}
-}*/
+}
 
 int main()
 {
@@ -740,21 +735,23 @@ int main()
 	clear_graphics_screen(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR);
 	set_foreground_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
 	draw_background();
+
 	set_background_color(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, 0x000000);
 	//draw_block(20,45,21,41,26,40);
 	//draw_block(40,15,41,11,16,40);
 	//draw_block(285,44,300,47,285,51); //y x; a d b
+
 
 	//print_string(XPAR_VGA_PERIPH_MEM_0_S_AXI_MEM0_BASEADDR, "LEVEL", strlen("LEVEL"));
 	//draw_minus_two();
 	//draw_leg();
 	draw_left_leg(2);
 	draw_right_leg(2);
-	draw_ball(200,50, 0,0);
+	//draw_ball(200,50, 0,0);
 	lives=1;
 	int in_game=0;
 	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
-	int ball_angle=350;
+	int ball_angle=70;
 	//while(1)
 		/*while(input != 30)	//wait for input from user
 		{
@@ -781,8 +778,8 @@ int main()
 							case DOWN_JOY:
 								if(lives > 0 && !in_game)
 								{
-									ball_x=20;
-									ball_y=200;
+									ball_x=32;
+									ball_y=250;
 									move_ball=1;
 								}
 								break;
@@ -825,8 +822,16 @@ int main()
 								ball_x++;
 								ball_y=ball_y+tan((360-ball_angle));
 							}
-							draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
-
+							if(ball_y<12)
+							{
+								draw_ball(ball_x,12,ball_x_prev,ball_y_prev);
+								ball_y=12;
+							}
+							else
+							{
+								draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
+							}
+							ball_angle=get_angle(ball_x,ball_y,ball_angle);
 							ball_x_prev=ball_x;
 
 							ball_y_prev=ball_y;
