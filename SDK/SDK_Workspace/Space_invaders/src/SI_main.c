@@ -472,7 +472,7 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
     }
 }
 
-int ball_next_y(ball_y,ball_angle)
+/*int ball_next_y(ball_y,ball_angle)
 {
 	if(ball_angle>=0 && ball_angle<90)
 	{
@@ -493,7 +493,7 @@ int ball_next_y(ball_y,ball_angle)
 	{
 		return 1;
 	}
-}
+}*/
 
 int main()
 {
@@ -754,9 +754,8 @@ int main()
 	lives=1;
 	int in_game=0;
 	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
-	int ball_angle=80;
+	int ball_angle=350;
 	//while(1)
-	{
 		/*while(input != 30)	//wait for input from user
 		{
 			input = VGA_PERIPH_MEM_mReadMemory(XPAR_MY_PERIPHERAL_0_BASEADDR);
@@ -791,16 +790,49 @@ int main()
 
 						if(projectil_flag && move_ball)
 						{
-							ball_y=ball_next_y(ball_y,ball_angle);
-							ball_x++;
+							switch(ball_angle)
+							{
+								case 0:
+									ball_x++;
+									break;
+								case 90:
+									ball_y--;
+									break;
+								case 180:
+									ball_x--;
+									break;
+								case 270:
+									ball_y++;
+									break;
+							}
+							if(ball_angle>0 && ball_angle<90)
+							{
+								ball_x++;
+								ball_y=-tan(ball_angle)+ball_y;
+							}
+							if(ball_angle>90 && ball_angle<180)
+							{
+								ball_x--;
+								ball_y=-tan((180-ball_angle))+ball_y;
+							}
+							if(ball_angle>180 && ball_angle<270)
+							{
+								ball_x--;
+								ball_y=ball_y+tan((ball_angle-180));
+							}
+							if(ball_angle>270 && ball_angle<360)
+							{
+								ball_x++;
+								ball_y=ball_y+tan((360-ball_angle));
+							}
 							draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
 
 							ball_x_prev=ball_x;
+
 							ball_y_prev=ball_y;
 							projectil_flag = 0;
 						}
 				}
-	}
 	return 0;
 }
 

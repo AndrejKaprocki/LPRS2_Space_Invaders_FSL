@@ -2,7 +2,7 @@
 #  Xilinx EDK 14.6 EDK_P.68d
 #  Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 #
-#  File     system_setup.tcl (Tue May 23 11:10:54 2017)
+#  File     system_setup.tcl (Wed May 24 11:35:51 2017)
 #
 #  ISE Simulator Setup Script File
 #
