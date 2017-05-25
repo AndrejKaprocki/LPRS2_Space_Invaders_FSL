@@ -12,7 +12,7 @@ __xps/ise/xmsgprops.lst
 -s
 isim
 -X
-C:/materija/ra2/LPRS2_Space_Invaders_FSL/
+C:/materija/ra2-2014/LPRS2_Space_Invaders_FSL/
 -m
 behavioral
 system.mhs
