@@ -15,7 +15,6 @@ Xuint8	spaceship_speed = 8,
 		spaceship_x = 0,
 		projectil_speed = 0,
 		spaceship_flag = 0,
-		projectil_flag = 0,
 		invader_speed = 0,
 		shoot_flag = 0,
 		invader_shoot_flag = 0,
@@ -31,6 +30,7 @@ Xuint8	spaceship_speed = 8,
 		left_leg_p=3,
 		right_leg_p=3,
 		leg_speed;
+volatile Xuint8 projectil_flag = 0;
 
 Xuint8 flag_row[INIT_ROWS];
 /****************************/

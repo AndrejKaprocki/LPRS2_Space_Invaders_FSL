@@ -19,7 +19,6 @@ extern  Xuint8	spaceship_speed,
 		projectil_speed,
 		invader_speed,
 		spaceship_flag,
-		projectil_flag,
 		shoot_flag,
 		invader_shoot_flag,
 		move_faster,
@@ -33,6 +32,7 @@ extern  Xuint8	spaceship_speed,
 		right_leg_p,
 		left_leg_p,
 		leg_speed;
+extern volatile Xuint8 projectil_flag;
 
 extern Xuint8 flag_row[INIT_ROWS];
 /****************************/
