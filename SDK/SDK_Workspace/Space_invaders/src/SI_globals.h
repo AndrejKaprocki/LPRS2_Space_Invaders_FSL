@@ -30,6 +30,8 @@ extern  Xuint8	spaceship_speed,
 		lives,
 		seed,
 		input,
+		right_leg_p,
+		left_leg_p,
 		leg_speed;
 
 extern Xuint8 flag_row[INIT_ROWS];

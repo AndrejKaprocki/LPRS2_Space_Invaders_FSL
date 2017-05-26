@@ -28,6 +28,8 @@ Xuint8	spaceship_speed = 8,
 		lives = INIT_LIVES,
 		seed = 0,
 		input = 0,
+		left_leg_p=3,
+		right_leg_p=3,
 		leg_speed;
 
 Xuint8 flag_row[INIT_ROWS];

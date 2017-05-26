@@ -156,6 +156,9 @@ void draw_ball(int x, int y, int x_prev, int y_prev)
 	PUT_TO_FSL(((y+4)*80 + x+1), 0x33333331);
 	PUT_TO_FSL(((y+5)*80 + x+1), 0x33333311);
 	PUT_TO_FSL(((y+6)*80 + x+1), 0x33331111);
+	draw_background();
+	draw_left_leg(left_leg_p);
+	draw_right_leg(left_leg_p);
 }
 void draw_left_leg(int index)
 {
@@ -218,83 +221,109 @@ void move_left_leg()
 {
 	draw_left_leg(3);
 	draw_left_leg(3);
+	left_leg_p=3;
 	erase_left_leg(3);
 	draw_left_leg(2);
 	draw_left_leg(2);
+	left_leg_p=2;
 	erase_left_leg(2);
 	draw_left_leg(1);
 	draw_left_leg(1);
+	left_leg_p=1;
 	erase_left_leg(1);
 	draw_left_leg(0);
 	draw_left_leg(0);
+	left_leg_p=0;
 	erase_left_leg(0);
 	draw_left_leg(-1);
 	draw_left_leg(-1);
+	left_leg_p=-1;
 	erase_left_leg(-1);
 	draw_left_leg(-2);
 	draw_left_leg(-2);
+	left_leg_p=-2;
 	erase_left_leg(-2);
 	draw_left_leg(-3);
 	draw_left_leg(-3);
+	left_leg_p=-3;
 	erase_left_leg(-3);
 	draw_left_leg(-2);
 	draw_left_leg(-2);
+	left_leg_p=-2;
 	erase_left_leg(-2);
 	draw_left_leg(-1);
 	draw_left_leg(-1);
+	left_leg_p=-1;
 	erase_left_leg(-1);
 	draw_left_leg(0);
 	draw_left_leg(0);
+	left_leg_p=0;
 	erase_left_leg(0);
 	draw_left_leg(1);
 	draw_left_leg(1);
+	left_leg_p=1;
 	erase_left_leg(1);
 	draw_left_leg(2);
 	draw_left_leg(2);
+	left_leg_p=2;
 	erase_left_leg(2);
 	draw_left_leg(3);
 	draw_left_leg(3);
+	left_leg_p=3;
 }
 void move_right_leg()
 {
 	draw_right_leg(3);
 	draw_right_leg(3);
+	right_leg_p=3;
 	erase_right_leg(3);
 	draw_right_leg(2);
 	draw_right_leg(2);
+	right_leg_p=2;
 	erase_right_leg(2);
 	draw_right_leg(1);
 	draw_right_leg(1);
+	right_leg_p=1;
 	erase_right_leg(1);
 	draw_right_leg(0);
 	draw_right_leg(0);
+	right_leg_p=0;
 	erase_right_leg(0);
 	draw_right_leg(-1);
 	draw_right_leg(-1);
+	right_leg_p=-1;
 	erase_right_leg(-1);
 	draw_right_leg(-2);
 	draw_right_leg(-2);
+	right_leg_p=-2;
 	erase_right_leg(-2);
 	draw_right_leg(-3);
 	draw_right_leg(-3);
+	right_leg_p=-3;
 	erase_right_leg(-3);
 	draw_right_leg(-2);
 	draw_right_leg(-2);
+	right_leg_p=-2;
 	erase_right_leg(-2);
 	draw_right_leg(-1);
 	draw_right_leg(-1);
+	right_leg_p=-1;
 	erase_right_leg(-1);
 	draw_right_leg(0);
 	draw_right_leg(0);
+	right_leg_p=0;
 	erase_right_leg(0);
 	draw_right_leg(1);
 	draw_right_leg(1);
+	right_leg_p=1;
 	erase_right_leg(1);
 	draw_right_leg(2);
 	draw_right_leg(2);
+	right_leg_p=2;
 	erase_right_leg(2);
 	draw_right_leg(3);
 	draw_right_leg(3);
+	right_leg_p=3;
 }
 void draw_background()
 {
@@ -474,38 +503,153 @@ void num_to_str(char *s, unsigned long bin, unsigned char n)
 
 int get_angle(int x, int y, int angle)
 {
-	if(y<=408 && y>12 && x==30 && angle>180)
+	if(y<=410 && y>12 && x==30 && angle>180)
 		return 540-angle;
-	if(y<=408 && y>12 &&  x==30 && angle<=180)
+	if(y<=410 && y>12 &&  x==30 && angle<=180)
 		return 180-angle;
-	if(y<=408 && y>12 && x==52 && angle<=90)
+	if(y<=410 && y>12 && x==52 && angle<=90)
 		return 180-angle;
-	if(y<=408 && y>12 && x==52 && angle>270)
+	if(y<=410 && y>12 && x==52 && angle>270)
 		return 540-angle;
 	if(y==17 && angle<=90)
 		return 360-angle;
 	if(y==17 && angle>90)
 		return 360-angle;
 	int i,j;
-	for(i=0;i<30;i++)
+
+	if((y>=410 && x==30) || (y>418 && x==31) || (y>426 && x==32) || (y>434 && x==33) || (y>442 && x==34) || (y>450 && x==35))
 	{
-		if(y==408+i && x==30+i/4+1)
+		if(angle<270)
+			angle=angle-180;
+		else
+			angle=(angle+45)%360;
+		return angle;
+	}
+	if((y>=410 && x==52) || (y>417 && x==51) || (y>424 && x==50) || (y>431 && x==49) || (y>438 && x==48) || (y>446 && x==47))
+	{
+		if(angle>270)
+			angle=angle-180;
+		else
+			angle=angle+45;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>443 && x==35) || (y>446 && x==36) || (y>449 && x==37) || (y>452 && x==38) || (y>455 && x==39)) && left_leg_p==3)
+	{
+		if(angle<270)
+			angle=angle-150;
+		else
+			angle=(angle+30)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>442 && x==35) || (y>444 && x==36) || (y>446 && x==37) || (y>448 && x==38) || (y>450 && x==39)) && left_leg_p==2)
+	{
+		if(angle<270)
+			angle=angle-140;
+		else
+			angle=(angle+40)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>441 && x==35) || (y>442 && x==36) || (y>443 && x==37) || (y>444 && x==38) || (y>445 && x==39)) && left_leg_p==1)
+	{
+		if(angle<270)
+			angle=angle-130;
+		else
+			angle=(angle+50)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>440 && x==35) || (y>440 && x==36) || (y>440 && x==37) || (y>440 && x==38) || (y>440 && x==39)) && left_leg_p==0)
+	{
+		if(angle<270)
+			angle=angle-150;
+		else
+			angle=(angle+60)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>439 && x==35) || (y>438 && x==36) || (y>437 && x==37) || (y>436 && x==38) || (y>435 && x==39)) && left_leg_p==-1)
+	{
+		if(angle<270)
+			angle=angle-160;
+		else
+			angle=(angle+70)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>438 && x==35) || (y>436 && x==36) || (y>434 && x==37) || (y>432 && x==38) || (y>430 && x==39)) && left_leg_p==-2)
+	{
+		if(angle<270)
+			angle=angle-170;
+		else
+			angle=(angle+80)%360;
+		return angle;
+	}
+	if(((y>440 && x==34) || (y>437 && x==35) || (y>434 && x==36) || (y>431 && x==37) || (y>428 && x==38) || (y>425 && x==39)) && left_leg_p==-3)
+	{
+		if(angle<270)
+			angle=angle-180;
+		else
+			angle=(angle+90)%360;
+		return angle;
+	}
+
+
+
+
+	if(((y>440 && x==49) || (y>443 && x==48) || (y>446 && x==47) || (y>449 && x==46) || (y>452 && x==45) || (y>455 && x==44)) && right_leg_p==3)
 		{
 			if(angle<270)
-				angle=angle-180;
+				angle-=180;
 			else
-				angle=angle+45;
+				angle=(angle+90)-360;
+			return angle;
 		}
-		if(y==409+i && x==52-i/4-1)
+		if(((y>440 && x==49) || (y>442 && x==48) || (y>444 && x==47) || (y>446 && x==46) || (y>448 && x==45) || (y>450 && x==44)) && right_leg_p==2)
 		{
-			if(angle>270)
-				angle=angle-180;
-			else
-				angle=angle+45;
+			if(angle<270)
+							angle-=160;
+						else
+							angle=(angle+110)-360;
+						return angle;
 		}
-	}
+		if(((y>440 && x==49) || (y>441 && x==48) || (y>442 && x==47) || (y>443 && x==46) || (y>444 && x==45) || (y>445 && x==44)) && right_leg_p==1)
+		{
+			if(angle<270)
+							angle-=140;
+						else
+							angle=(angle+130)-360;
+						return angle;
+		}
+		if(((y>440 && x==49) || (y>440 && x==48) || (y>440 && x==47) || (y>440 && x==46) || (y>440 && x==45) || (y>440 && x==44)) && right_leg_p==0)
+		{
+			if(angle<270)
+							angle-=120;
+						else
+							angle=(angle+150)-360;
+						return angle;
+		}
+		if(((y>440 && x==49) || (y>439 && x==48) || (y>438 && x==47) || (y>437 && x==46) || (y>436 && x==45) || (y>435 && x==44)) && right_leg_p==-1)
+		{
+			if(angle<270)
+							angle-=100;
+						else
+							angle=(angle+170)-360;
+						return angle;
+		}
+		if(((y>440 && x==49) || (y>438 && x==48) || (y>436 && x==47) || (y>434 && x==46) || (y>432 && x==45) || (y>430 && x==44)) && right_leg_p==-2)
+		{
+			if(angle<270)
+							angle-=80;
+						else
+							angle=(angle+190)-360;
+						return angle;
+		}
+		if(((y>440 && x==49) || (y>437 && x==48) || (y>434 && x==47) || (y>431 && x==46) || (y>428 && x==45) || (y>425 && x==44)) && right_leg_p==-3)
+		{
+			if(angle<270)
+							angle-=60;
+						else
+							angle=(angle+210)-360;
+						return angle;
+		}
 	return angle;
-
 }
 
 int main()
@@ -765,11 +909,12 @@ int main()
 	//draw_leg();
 	draw_left_leg(3);
 	draw_right_leg(3);
+	left_leg_p=3;
 	//draw_ball(200,50, 0,0);
 	lives=1;
 	int in_game=0;
 	int ball_x, ball_y, ball_x_prev, ball_y_prev, move_ball=0;
-	int ball_angle=70;
+	int ball_angle=80;
 	//while(1)
 		/*while(input != 30)	//wait for input from user
 		{
@@ -797,7 +942,7 @@ int main()
 								if(lives > 0 && !in_game)
 								{
 									ball_x=42;
-									ball_y=260;
+									ball_y=250;
 									move_ball=1;
 								}
 								break;
@@ -850,6 +995,8 @@ int main()
 								draw_ball(ball_x,ball_y,ball_x_prev,ball_y_prev);
 							}
 							ball_angle=get_angle(ball_x,ball_y,ball_angle);
+							if(ball_angle<0) ball_angle+=360;
+							if(ball_angle>360) ball_angle-=360;
 							ball_x_prev=ball_x;
 
 							ball_y_prev=ball_y;
